@@ -1,0 +1,8 @@
+{
+  "name": "Plantsy_Major",
+  "version": "1.0.0",
+  "main": "index.js",
+  "repository": "https://github.com/dallinmajor/Plantsy_Major.git",
+  "author": "Dally Wally <dallin.watac.major@gmail.com>",
+  "license": "MIT"
+}
