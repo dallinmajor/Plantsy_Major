@@ -5,7 +5,13 @@
   "dependencies": {
     "react": "^16.5.2",
     "react-dom": "^16.5.2",
-    "react-scripts": "2.0.4"
+    "react-dropzone": "^6.0.2",
+    "react-image-crop": "^6.0.0",
+    "react-lazyload": "^2.3.0",
+    "react-router-dom": "^4.3.1",
+    "react-scripts": "2.0.4",
+    "reactstrap": "^6.5.0",
+    "sfcookies": "^1.0.2"
   },
   "scripts": {
     "start": "react-scripts start",
@@ -21,5 +27,7 @@
     "not dead",
     "not ie <= 11",
     "not op_mini all"
-  ]
+  ],
+  "main": "index.js",
+  "license": "MIT"
 }
