@@ -1,9 +1,9 @@
 const router = require("express").Router();
-const upload = require('../../gridfs').upload;
+const upload = require('../../../gridfs/upload').upload;
 const mongoose = require('mongoose');
 const Grid = require('gridfs-stream');
-const conn = require('../../connections').conn;
-const db = require('../../models');
+const conn = require('../../../gridfs/connections').conn;
+const db = require('../../../models');
 
 let gfs;
 
