@@ -2,6 +2,13 @@
   "name": "Plantsy_Major",
   "version": "1.0.0",
   "main": "index.js",
+  "scripts": {
+    "start": "concurrently --kill-others-on-fail \"yarn server\" \"yarn client\"",
+    "client": "cd client && yarn start",
+    "server": "nodemon server.js",
+    "seed": "node scripts/seeds.js",
+    "dev": "concurrently --kill-others-on-fail \"yarn server\" \"yarn client\""
+  },
   "repository": "https://github.com/dallinmajor/Plantsy_Major.git",
   "author": "Dally Wally <dallin.watac.major@gmail.com>",
   "license": "MIT",
