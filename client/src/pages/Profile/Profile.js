@@ -1,4 +1,6 @@
 import React, { Component } from "react";
+import LgBox from '../../wrappers/LgBox';
+import './Profile.css';
 import API from '../../utils';
 
 class Profile extends Component {
@@ -16,7 +18,7 @@ class Profile extends Component {
         }
     }
 
-    async componentDidMount() {
+    componentWillMount() {
         this.getUser();
     }
 
@@ -138,13 +140,10 @@ class Profile extends Component {
         const { username, password, fullname, about, } = this.state.user
         return (
             <div>
-                <div>{username}</div>
-                <div>{password}</div>
-                <div>{fullname}</div>
-                <div>{about}</div>
+                <input className='hidden-button' type='file' name='image'/>
+                    <LgBox/>
             </div>
-        )
-    }
-};
-
+            )};
+        }; 
+        
 export default Profile;

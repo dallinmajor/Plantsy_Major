@@ -1,10 +1,3 @@
-.lg_box {
-    width: 100%;
-    height: 100%;
-    position: absolute;
-    top: 30px;
-}
-
 .error {
     color: rgba(197, 4, 4, 0.712);
     font-style: italic;

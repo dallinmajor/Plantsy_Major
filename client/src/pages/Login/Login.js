@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import './Login.css';
 import API from '../../utils';
+import { bake_cookie, read_cookie} from 'sfcookies';
 import {
     Container, Col, Form,
     FormGroup, Label, Input,
@@ -20,6 +21,17 @@ class Login extends Component {
             },
             error: null
         }
+    }
+
+    componentWillMount() {
+        this.isLoggedIn();
+    }
+
+    isLoggedIn() {
+        const cookie = read_cookie('User');
+        if (cookie[0]) {
+            window.location.assign('/profile/' + cookie);
+        };
     }
 
     validateEmail = (e) => {
@@ -48,11 +60,12 @@ class Login extends Component {
         if (this.state.username && this.state.password) {
             return API.User.userValidation(this.state.username, this.state.password)
                 .then(result => {
-                    if (result.data.length <1) {
+                    if (result.data.length < 1) {
                         this.setState({
                             error: 'Invalid Username and Password!'
                         })
                     } else {
+                        bake_cookie('User', result.data[0]._id);
                         window.location.assign('/profile/' + result.data[0]._id);
                     }
                 });
@@ -72,10 +85,10 @@ class Login extends Component {
                 <div className='login'>
                     <Container className="App">
                         <h2>Sign In</h2>
-                            {this.state.error ? (
-                                <div className='error'>{this.state.error}</div>
-                            ) : null}
-                        <br/>
+                        {this.state.error ? (
+                            <div className='error'>{this.state.error}</div>
+                        ) : null}
+                        <br />
                         <Form className="form">
                             <Col>
                                 <FormGroup>
@@ -109,9 +122,9 @@ class Login extends Component {
                                     />
                                 </FormGroup>
                             </Col>
-                                <a href='/create' className='create'>Create Account</a>
-                            <br/>
-                            <br/>
+                            <a href='/create' className='create'>Create Account</a>
+                            <br />
+                            <br />
                             <Button onClick={this.validateEmail}>Submit</Button>
                         </Form>
                     </Container>
