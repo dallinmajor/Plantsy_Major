@@ -1,0 +1,10 @@
+.form_user {
+    width: 60%;
+    padding: 30px;
+    margin: auto;
+    margin-top: 60px;
+    border-style: solid;
+    border-width: 1px;
+    border-radius: 10px;
+    top: 50px;
+}
