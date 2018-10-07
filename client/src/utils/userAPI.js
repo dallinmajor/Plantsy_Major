@@ -8,22 +8,22 @@ export default {
     },
 
     find: (id) => {
-        return axios.get('api/user/' + id)
+        return axios.get('/api/user/' + id)
             .catch(err => console.log(err));
     },
 
     update: (id, updates) => {
-        return axios.put('api/user/' + id, updates)
+        return axios.put('/api/user/' + id, updates)
             .catch(err => console.log(err));
     },
 
     remove: (id) => {
-        return axios.delete('api/user/' + id)
+        return axios.delete('/api/user/' + id)
             .catch(err => console.log(err));
     },
 
     userValidation: (username, password) => {
-        return axios.post('api/user', {
+        return axios.post('/api/user', {
             username: username,
             password: password
         })

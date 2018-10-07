@@ -33,10 +33,12 @@ class Profile extends Component {
     }
 
     getUser() {
-        console.log(this.props.match.params.id)
-        // API.User.find(this.props.match.params.id)
-        //     .then(res => console.log(res))
-        //     .catch(err => console.log(err));
+        API.User.find(this.props.match.params.id)
+            .then(res => this.setState({
+                user: res.data,
+                display_plants: res.data.plants
+            }))
+            .catch(err => console.log(err));
     }
 
     prepPlantForCreation = () => {

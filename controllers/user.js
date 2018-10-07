@@ -9,8 +9,9 @@ module.exports = {
             .catch(err => res.status(422).json(err));
     },
     findUser: function (req, res) {
+        console.log(req.params.id);
         db.User
-            .findbyId(req.params.id)
+            .findById(req.params.id)
             .populate({
                 path: 'plants',
                 populate: {
