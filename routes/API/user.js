@@ -11,7 +11,7 @@ router.route("/register")
     .post(userController.create);
 
 // api/user/:id
-router.route("/:username")
+router.route("/:id")
     .get(userController.findUser)
     .put(userController.update)
     .delete(userController.remove);

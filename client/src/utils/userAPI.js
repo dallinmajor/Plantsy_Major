@@ -7,18 +7,18 @@ export default {
             .catch(err => console.log(err));
     },
 
-    findByUsername: (username) => {
-        return axios.get('api/user/' + username)
+    findByUsername: (id) => {
+        return axios.get('api/user/' + id)
             .catch(err => console.log(err));
     },
 
-    update: (username, updates) => {
-        return axios.put('api/user/' + username, updates)
+    update: (id, updates) => {
+        return axios.put('api/user/' + id, updates)
             .catch(err => console.log(err));
     },
 
-    remove: (username) => {
-        return axios.delete('api/user/' + username)
+    remove: (id) => {
+        return axios.delete('api/user/' + id)
             .catch(err => console.log(err));
     },
 

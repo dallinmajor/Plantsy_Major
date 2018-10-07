@@ -64,7 +64,8 @@ class CreateUser extends Component {
                 "lastname": lastname,
                 "about": about,
 
-            }).then(result => window.location('/profile/' + result.data));
+            }).then(result => console.log(result.data));
+            // window.location('/profile/' + result.data)
         }
     }
 
@@ -150,7 +151,7 @@ class CreateUser extends Component {
                                 </FormGroup>
                             </Col>
                             <br /><br />
-                            <Button onClick={this.handleNextBtn}>Next</Button>
+                            <Button onClick={this.handleSubmit}>Submit</Button>
                         </Form>
                     </Container>
                     <br /><br />
