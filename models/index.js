@@ -1,6 +1,6 @@
-const User = require('./User');
-const Comments = require('./Comments');
-const Plant = require('./Plant');
+const User = require('./user');
+const Comments = require('./comment');
+const Plant = require('./plant');
 
 module.exports = {
     User: User,

@@ -1,8 +1,8 @@
 const router = require('express').Router();
-const userRoutes = require('./user_routes');
-const plantRoutes = require('./plant_routes');
-const commentsRoutes = require('./comment_routes');
-const imageRoutes = require('./image_routes');
+const userRoutes = require('./user');
+const plantRoutes = require('./plant');
+const commentsRoutes = require('./comment');
+const imageRoutes = require('./image');
 
 router.use('/user', userRoutes);
 router.use('/plant', plantRoutes);

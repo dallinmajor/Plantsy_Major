@@ -1,5 +1,5 @@
 const router = require("express").Router()
-const plantController = require('../../../../controllers/plantControllers');
+const plantController = require('../../controllers/plant');
 
 
 
