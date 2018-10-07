@@ -3,6 +3,7 @@ import Profile from './pages/Profile';
 import CreateUser from './pages/CreateUser';
 import Login from './pages/Login';
 import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
+import './index.css';
 import {read_cookie} from 'sfcookies';
 
 

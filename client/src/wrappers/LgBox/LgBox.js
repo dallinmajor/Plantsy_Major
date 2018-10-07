@@ -6,9 +6,7 @@ const LgBox = ({ children }) => (
         <div className='cover_top'>
         <div className='lg_box_buffer'/>
             <div className='center_lg_box'>
-                <div className='inner_box'>
-                    {children}
-                </div>
+                {children}
             </div>
         </div>
     </div>

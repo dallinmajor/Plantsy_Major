@@ -1,7 +1,9 @@
 import React, { Component } from "react";
-import LgBox from '../../wrappers/LgBox';
 import './Profile.css';
 import API from '../../utils';
+import ProfHead from '../../containers/ProfHead';
+
+const fileTypes = ['image/x-png', 'image/jpeg', 'image/png', 'image/jpg']
 
 class Profile extends Component {
     constructor(props) {
@@ -140,10 +142,10 @@ class Profile extends Component {
         const { username, password, fullname, about, } = this.state.user
         return (
             <div>
-                <input className='hidden-button' type='file' name='image'/>
-                    <LgBox/>
+                <ProfHead/>
             </div>
-            )};
-        }; 
-        
+        )
+    };
+};
+
 export default Profile;

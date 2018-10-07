@@ -1,0 +1,1 @@
+export {default} from './Crop1X1';
