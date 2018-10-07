@@ -1,5 +1,5 @@
 const router = require("express").Router();
-const commentsController = require('../../../controllers/commentsController');
+const commentsController = require('../../controllers/comments');
 
 // /api/comments/all
 router.route('/all')
