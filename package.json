@@ -4,5 +4,16 @@
   "main": "index.js",
   "repository": "https://github.com/dallinmajor/Plantsy_Major.git",
   "author": "Dally Wally <dallin.watac.major@gmail.com>",
-  "license": "MIT"
+  "license": "MIT",
+  "dependencies": {
+    "body-parser": "^1.18.3",
+    "concurrently": "^4.0.1",
+    "crypto": "^1.0.1",
+    "express": "^4.16.3",
+    "gridfs-stream": "^1.1.1",
+    "method-override": "^3.0.0",
+    "mongoose": "^5.3.1",
+    "multer": "^1.4.0",
+    "multer-gridfs-storage": "^3.2.3"
+  }
 }
