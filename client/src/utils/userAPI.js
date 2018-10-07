@@ -7,7 +7,7 @@ export default {
             .catch(err => console.log(err));
     },
 
-    findByUsername: (id) => {
+    find: (id) => {
         return axios.get('api/user/' + id)
             .catch(err => console.log(err));
     },

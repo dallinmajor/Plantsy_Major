@@ -17,8 +17,7 @@ class CreateUser extends Component {
             validate: {
                 emailState: null
             },
-            next: false,
-            image: null
+            error: null
         }
     }
 
@@ -52,10 +51,10 @@ class CreateUser extends Component {
         })
     }
 
-    handleSubmit = (image) => {
-        console.log(image.data);
+    handleSubmit = () => {
+
         const { firstname, lastname, email, password, about } = this.state
-        if (firstname && lastname && email && password) {
+        if (firstname && lastname && email && password && about) {
             API.User.create({
                 "username": email,
                 "password": password,
@@ -64,9 +63,14 @@ class CreateUser extends Component {
                 "lastname": lastname,
                 "about": about,
 
-            }).then(result => console.log(result.data));
-            // window.location('/profile/' + result.data)
+            }).then(result => window.location.assign('/profile/' + result.data._id))
+                .catch(err => console.log(err));
+        } else {
+            this.setState({
+                error: "Ops! Your missing one!"
+            })
         }
+
     }
 
     render() {
@@ -150,7 +154,11 @@ class CreateUser extends Component {
                                     <Input type="textarea" className="input" onChange={this.handleInputChange} name="about" id="aboutInput" rows='10' />
                                 </FormGroup>
                             </Col>
-                            <br /><br />
+                            <br />
+                            {this.state.error ? (
+                                <div className='incomplete'>{this.state.error}</div>
+                            ) : null}
+                            <br />
                             <Button onClick={this.handleSubmit}>Submit</Button>
                         </Form>
                     </Container>

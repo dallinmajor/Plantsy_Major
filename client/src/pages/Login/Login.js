@@ -48,12 +48,12 @@ class Login extends Component {
         if (this.state.username && this.state.password) {
             return API.User.userValidation(this.state.username, this.state.password)
                 .then(result => {
-                    if (result.data === null) {
+                    if (result.data.length <1) {
                         this.setState({
                             error: 'Invalid Username and Password!'
                         })
                     } else {
-                        console.log(result.data);
+                        window.location.assign('/profile/' + result.data[0]._id);
                     }
                 });
         }
