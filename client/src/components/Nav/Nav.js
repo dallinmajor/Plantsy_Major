@@ -1,22 +1,16 @@
 import React from 'react';
 import './Nav.css';
 
-const Nav = (props) => (
+const Nav = () => (
+
     <div className="myNav">
-        <ul className="nav nav-pills">
-            <li className="nav-item buffer">
-                <a id="active" class="nav-link active" href="#">Home</a>
-            </li>
-            <li className="nav-item">
-                <a className="nav-link" href="#">About</a>
-            </li>
-            <li className="nav-item">
-                <a className="nav-link" href="#">Portfolio</a>
-            </li>
-            <li className="nav-item">
-                <a className="nav-link" href="#">Contact</a>
-            </li>
-        </ul>
+        <div className='plantsy-nav-color'>
+            <div className='nav-buffer'></div>
+            <div className="title">Plantsy  </div>
+            <div href='/create' className='plantsy-nav-link'>Home</div>
+            <div href='/create' className='plantsy-nav-link'>Feed</div>
+            <div href='/create' className='plantsy-nav-link'>Profile</div>
+        </div>
     </div>
 );
 

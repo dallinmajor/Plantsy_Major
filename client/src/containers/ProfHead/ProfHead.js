@@ -52,11 +52,7 @@ class ProfHead extends Component {
             return true;
         }
     }
-    sendBase64 = (base64) => {
-        console.log(base64);
-        
-    }
-
+    
     editProPic = (base64) => {
         this.setState({
             isEditting: false,
@@ -67,7 +63,14 @@ class ProfHead extends Component {
             .then(res => window.location.reload())
     }
 
+    exitEdit = () => {
+        this.setState({
+            isEditting: false
+        })
+    }
+
     handleImage = (e) => {
+        console.log('image selected!')
         e.preventDefault();
         const files = e.target.files;
         if (files && files.length > 0) {
@@ -93,8 +96,12 @@ class ProfHead extends Component {
         const { imgSrc, imgSrcExt, editFunc, editAspect, picPro, isEditting } = this.state
         return (
             <div>
-                {!this.state.picPro?null:<img onClick={this.clickFileUploader} src={'/api/image/' + picPro} alt='pic' />}
-                {!isEditting?null:<EditPhoto imgSrc={imgSrc} imgSrcExt={imgSrcExt} editProPic={this.editProPic} edit={{ aspect: 1 / 1 }} />}
+                
+                <div onClick={this.clickFileUploader} className='profile-upload'>
+                {!this.state.picPro?null:<img className='profile-picture' src={'/api/image/' + picPro} alt='pic' />}
+                </div>
+                
+                {isEditting?<EditPhoto imgSrc={imgSrc} imgSrcExt={imgSrcExt} editProPic={this.editProPic} edit={{ aspect: 1 / 1 }} exit={this.exitEdit} />:null}
                 <input className='hidden-button' type='file' name='image' ref={fileInput => this.fileInput = fileInput} accept={fileTypes} multiple={false} onChange={this.handleImage} />
             </div>
         )

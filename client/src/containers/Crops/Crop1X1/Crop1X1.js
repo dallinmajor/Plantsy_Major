@@ -118,7 +118,7 @@ class Crop1X1 extends Component {
             <div>
                 <input className='hidden-button' type='file' name='image' ref={fileInput => this.fileInput = fileInput} accept={fileTypes} multiple={false} onChange={this.handleImage} />
                 <div className='inner_box'>
-                    {this.state.imgSrc ? (
+                    {this.state.imgSrc? (
                         <div>
                             <div className="box-picture">
                                 <canvas ref={this.imagePreviewCanvasRef} className='imageCanvas'></canvas>

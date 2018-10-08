@@ -1,8 +1,43 @@
 .myNav {
-    background-color: black;
+    background-color: white;
+    /* border-bottom: 2px;
+    border-bottom-style: solid;
+    border-bottom-color: rgb(41, 218, 35); */
     width: 100%;
     position: fixed;
+    top: -4px;
     z-index: 99;
-    padding: 3px 10px;
+    display: flex;
+    justify-content: end;
+}
+
+.plantsy-nav-color {
+    width: 100%;
+    background-color: rgba(132, 255, 128, 0.5);
     padding-top: 0.5%;
+}
+
+.plantsy-nav-link {
+    width: 7%;
+    display: inline-block;
+    font-family: 'Special Elite', cursive;
+    vertical-align: text-bottom;
+}
+
+.nav-buffer {
+    display: inline-block;
+    width: 6%;
+}
+
+.title {
+    display: inline-block;
+    vertical-align: center;
+    color: rgb(12, 65, 28);
+    font-family: 'Special Elite', cursive;
+    font-size: 35px;
+    z-index: 0;
+    width: 70%;
+    padding: 0;
+    line-height: 34px;
+    height: auto;
 }
