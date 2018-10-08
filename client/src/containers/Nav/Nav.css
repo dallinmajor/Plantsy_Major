@@ -41,3 +41,27 @@
     line-height: 34px;
     height: auto;
 }
+
+.dropdown {
+    position: absolute;
+}
+
+.dropdown-content {
+    display: none;
+    position: fixed;
+    right: 5%;
+    background-color: #f9f9f9;
+    width: 100px;
+    line-height: 14px;
+    z-index: 99;
+}
+
+.dropdown-links {
+    margin: 10px;
+    text-align: right;
+    line-height: 14px;
+}
+
+.dropdown:hover .dropdown-content {
+    display: block;
+}

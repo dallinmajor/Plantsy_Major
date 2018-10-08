@@ -1,8 +1,11 @@
 import React, { Component } from "react";
 import './Nav.css';
+import CreatePlant from '../CreatePlant';
+import { image64toCanvasRef, extractImageFileExtensionFromBase64, base64StringtoFile, downloadBase64File } from '../../base64/base64';
 import { delete_cookie } from 'sfcookies';
 
-const fileTypes = ['image/x-png', 'image/jpeg', 'image/png', 'image/jpg']
+const fileTypes = ['image/x-png', 'image/jpeg', 'image/png', 'image/jpg'];
+const maxSize = 10000000;
 
 class Nav extends Component {
     constructor(props) {
@@ -74,17 +77,15 @@ class Nav extends Component {
                             <div className="dropdown plantsy-nav-link">
                                 <span>Profile</span>
                                 <div className="dropdown-content">
-                                    <p onClick={this.clickFileUploader}>Add Plant</p>
-                                </div>
-                                <div className="dropdown-content">
-                                    <p onClick={this.logOut}>Logout</p>
+                                    <p className='dropdown-links' onClick={this.clickFileUploader}>Add Plant</p>
+                                    <p className='dropdown-links' onClick={this.logOut}>Logout</p>
                                 </div>
                             </div>
                         </div>
                     </div>
-                    <input className='hidden-button' type='file' name='image' ref={fileInput => this.fileInput = fileInput} accept={fileTypes} multiple={false} onChange={this.addPlant} />
-                    {isCreatingPlant ? (
-                        <CreatePlant/>
+                    <input className='hidden-button' type='file' name='image' ref={fileInput => this.fileInput = fileInput} accept={fileTypes} multiple={false} onChange={this.handleImage} />
+                    {this.state.isCreatingPlant ? (
+                        <CreatePlant imgSrc={this.state.imgSrc} imgSrcExt={this.state.imgSrcExt}/>
                     ):null}
                 </div>
             )

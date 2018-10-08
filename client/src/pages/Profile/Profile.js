@@ -2,7 +2,7 @@ import React, { Component } from "react";
 import './Profile.css';
 import API from '../../utils';
 import ProfHead from '../../containers/ProfHead';
-import Nav from '../../components/Nav';
+import Nav from '../../containers/Nav';
 
 const fileTypes = ['image/x-png', 'image/jpeg', 'image/png', 'image/jpg']
 
@@ -140,7 +140,7 @@ class Profile extends Component {
 
     render() {
         return (
-            <div>
+            <div className='backDrop'>
                 <Nav/>
                 {!this.state.user ? null : (
                     <ProfHead picPro={this.state.user.profile_picture} picCover={this.state.user.cover_photo} id={this.state.user._id}/>
