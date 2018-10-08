@@ -3,7 +3,7 @@ const plantController = require('../../controllers/plant');
 
 
 
-router.route('/:username')
+router.route('/:id')
     .post(plantController.create)
 
 router.route('/all')

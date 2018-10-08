@@ -85,7 +85,7 @@ class Nav extends Component {
                     </div>
                     <input className='hidden-button' type='file' name='image' ref={fileInput => this.fileInput = fileInput} accept={fileTypes} multiple={false} onChange={this.handleImage} />
                     {this.state.isCreatingPlant ? (
-                        <CreatePlant imgSrc={this.state.imgSrc} imgSrcExt={this.state.imgSrcExt}/>
+                        <CreatePlant imgSrc={this.state.imgSrc} imgSrcExt={this.state.imgSrcExt} id={this.props.id}/>
                     ):null}
                 </div>
             )

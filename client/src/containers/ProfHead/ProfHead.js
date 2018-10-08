@@ -52,7 +52,7 @@ class ProfHead extends Component {
             return true;
         }
     }
-    
+
     editProPic = (base64) => {
         this.setState({
             isEditting: false,
@@ -96,12 +96,11 @@ class ProfHead extends Component {
         const { imgSrc, imgSrcExt, editFunc, editAspect, picPro, isEditting } = this.state
         return (
             <div>
-                
+
                 <div onClick={this.clickFileUploader} className='profile-upload'>
-                {!this.state.picPro?null:<img className='profile-picture' src={'/api/image/' + picPro} alt='pic' />}
+                    {this.state.picPro ? <img className='profile-picture' src={'/api/image/' + picPro} alt='pic' /> : <div className='photo-empty' />}
                 </div>
-                
-                {isEditting?<EditPhoto imgSrc={imgSrc} imgSrcExt={imgSrcExt} editProPic={this.editProPic} edit={{ aspect: 1 / 1 }} exit={this.exitEdit} />:null}
+                {isEditting ? <EditPhoto imgSrc={imgSrc} imgSrcExt={imgSrcExt} editProPic={this.editProPic} edit={{ aspect: 1 / 1 }} exit={this.exitEdit} /> : null}
                 <input className='hidden-button' type='file' name='image' ref={fileInput => this.fileInput = fileInput} accept={fileTypes} multiple={false} onChange={this.handleImage} />
             </div>
         )

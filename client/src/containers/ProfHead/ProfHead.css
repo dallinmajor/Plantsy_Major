@@ -5,6 +5,13 @@
 
 .profile-upload {
     width: 15%;
+} 
+
+.photo-empty {
+    background-color: rgb(177, 176, 176);
+    width: 100%;
+    padding-top: 100%;
+    border-radius: 100px;
 }
 
 .profile-picture {

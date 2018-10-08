@@ -18,17 +18,15 @@ module.exports = {
             .catch(err => res.status(422).json(err));
     },
     create: function (req, res) {
+        console.log(req.params.id);
         db.Plant
             .create(req.body)
             .then(dbModel => {
                 db.User
-                    .updateOne({
-                        username: req.params.username
-                    }, {
+                    .findByIdAndUpdate((req.params.id), {
                             $push: { plants: dbModel._id }
                         })
                     .then(() => res.send(dbModel))
-
             })
             .catch(err => res.status(422).json(err));
     },
