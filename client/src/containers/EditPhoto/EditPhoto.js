@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import LgBox from '../../wrappers/LgBox';
 import Crop1X1 from '../../containers/Crops/Crop1X1';
+import { Form, Col, FormGroup, Label, Input, Button, Container, FormFeedback, FormText } from 'reactstrap';
 import './EditPhoto.css';
 
 class EditPhoto extends Component {
