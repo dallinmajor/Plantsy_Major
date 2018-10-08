@@ -1,7 +1,7 @@
 import React, { Component } from "react";
-import Crop1X1 from '../Crops/Crop1X1';
-import LgBox from '../../wrappers/LgBox';
+import EditPhoto from '../EditPhoto';
 import './ProfHead.css';
+import API from '../../utils';
 import { image64toCanvasRef, extractImageFileExtensionFromBase64, base64StringtoFile, downloadBase64File } from '../../base64/base64';
 
 const fileTypes = ['image/x-png', 'image/jpeg', 'image/png', 'image/jpg']
@@ -11,9 +11,23 @@ class ProfHead extends Component {
     constructor(props) {
         super(props)
         this.state = {
+            id: null,
+            picPro: null,
+            picCov: null,
             imgSrc: null,
-            imgSrcExt: null
+            imgSrcExt: null,
+            editFunc: null,
+            editAspect: null,
+            isEditting: false
         }
+    }
+
+    componentWillMount() {
+        this.setState({
+            picPro: this.props.picPro,
+            picCov: this.props.picCov,
+            id: this.props.id
+        })
     }
 
     clickFileUploader = () => {
@@ -38,6 +52,20 @@ class ProfHead extends Component {
             return true;
         }
     }
+    sendBase64 = (base64) => {
+        console.log(base64);
+        
+    }
+
+    editProPic = (base64) => {
+        this.setState({
+            isEditting: false,
+        })
+        const fd = new FormData();
+        fd.append('image', base64);
+        API.Image.updatePro(this.state.id, fd)
+            .then(res => window.location.reload())
+    }
 
     handleImage = (e) => {
         e.preventDefault();
@@ -48,8 +76,8 @@ class ProfHead extends Component {
                 const image = files[0];
                 const reader = new FileReader();
                 reader.addEventListener("load", () => {
-                    console.log(reader.result)
                     this.setState({
+                        isEditting: true,
                         imgSrc: reader.result,
                         imgSrcExt: extractImageFileExtensionFromBase64(reader.result)
                     })
@@ -60,20 +88,14 @@ class ProfHead extends Component {
     }
 
 
+
     render() {
-        const { imgSrc, imgSrcExt } = this.state
+        const { imgSrc, imgSrcExt, editFunc, editAspect, picPro, isEditting } = this.state
         return (
             <div>
-                <button onClick={this.clickFileUploader}>click</button>
-                <br /><br />
+                {!this.state.picPro?null:<img onClick={this.clickFileUploader} src={'/api/image/' + picPro} alt='pic' />}
+                {!isEditting?null:<EditPhoto imgSrc={imgSrc} imgSrcExt={imgSrcExt} editProPic={this.editProPic} edit={{ aspect: 1 / 1 }} />}
                 <input className='hidden-button' type='file' name='image' ref={fileInput => this.fileInput = fileInput} accept={fileTypes} multiple={false} onChange={this.handleImage} />
-                {!imgSrc ? null : (
-                    <LgBox>
-                        <Crop1X1
-                            src={imgSrc}
-                        />
-                    </LgBox>
-                )}
             </div>
         )
     }

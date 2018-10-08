@@ -1,10 +1,7 @@
 import React, { Component } from "react";
-import axios from 'axios';
 import ReactCrop from 'react-image-crop';
 import { image64toCanvasRef, extractImageFileExtensionFromBase64, base64StringtoFile, downloadBase64File } from '../../../base64/base64';
-// import 'react-image-crop/dist/ReactCrop.css';
 import './Crop1X1.css';
-import API from '../../../utils';
 
 const maxSize = 1000000;
 const fileTypes = ['image/x-png', 'image/jpeg', 'image/png', 'image/jpg']
@@ -16,16 +13,17 @@ class Crop1X1 extends Component {
         this.imagePreviewCanvasRef = React.createRef()
         this.state = {
             imgSrc: null,
+            imgSrcExt: null,
             isCropped: false,
-            crop: {
-                aspect: 1 / 1
-            }
+            crop: null
         }
     }
 
     componentDidMount() {
         this.setState({
-            imgSrc: this.props.src
+            imgSrc: this.props.imgSrc,
+            imgSrcExt: this.props.imgSrcExt,
+            crop: this.props.aspect
         })
     }
 
@@ -64,7 +62,6 @@ class Crop1X1 extends Component {
                 const image = files[0];
                 const reader = new FileReader();
                 reader.addEventListener("load", () => {
-                    console.log(reader.result)
                     this.setState({
                         imgSrc: reader.result,
                         imgSrcExt: extractImageFileExtensionFromBase64(reader.result)
@@ -98,6 +95,7 @@ class Crop1X1 extends Component {
             const imageData64 = canvasRef.toDataURL('image' + imgSrcExt);
             const myFileName = "Preview File" + imgSrcExt
             const myNewCroppedFile = base64StringtoFile(imageData64, myFileName)
+            this.handleDefaultClearing();
             this.props.sendBase64(myNewCroppedFile);
         }
     }
@@ -111,9 +109,7 @@ class Crop1X1 extends Component {
             imgSrc: null,
             imgSrcExt: null,
             isCropped: false,
-            crop: {
-                aspect: 1 / 1
-            }
+            crop: null
         })
     }
     render() {

@@ -9,8 +9,7 @@ class Profile extends Component {
     constructor(props) {
         super(props)
         this.state = {
-            user: { plants: 'Plant' },
-            tab: 'default',
+            user: null,
             display_plants: [],
             addingPlant: false,
             plant: '',
@@ -20,7 +19,7 @@ class Profile extends Component {
         }
     }
 
-    componentWillMount() {
+    async componentWillMount() {
         this.getUser();
     }
 
@@ -139,10 +138,11 @@ class Profile extends Component {
     }
 
     render() {
-        const { username, password, fullname, about, } = this.state.user
         return (
             <div>
-                <ProfHead/>
+                {!this.state.user ? null : (
+                    <ProfHead picPro={this.state.user.profile_picture} picCover={this.state.user.cover_photo} id={this.state.user._id} />
+                ) }   
             </div>
         )
     };

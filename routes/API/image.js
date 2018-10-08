@@ -32,11 +32,10 @@ router.post('/', upload.single('image'), (req, res) => {
     res.send(req.file.filename);
 })
 
-router.post('/profilePicture/:username', upload.single('image'), (req, res) => {
-    //Update user profile_picture. if there is one there replace it
+router.post('/picPro/:id', upload.single('image'), (req, res) => {
     db.User
-        .updateOne({ username: req.params.username }, { profile_picture: req.file.filename })
-        .then(dbModel => res.json(dbModel))
+        .findByIdAndUpdate((req.params.id), { profile_picture: req.file.filename })
+        .then(dbModel => res.json(req.file.filename))
         .catch(err => res.status(422).json(err));
 });
 
@@ -52,7 +51,6 @@ router.post('/coverPhoto/:username', upload.single('image'), (req, res) => {
 });
 
 router.get('/all', (req, res) => {
-
     gfs.files.find().toArray((err, files) => {
         res.json(files);
     });
