@@ -37,10 +37,10 @@
     min-height: 600px;
     z-index: 60;
     background-color: white;
-    border-style: solid;
-    border-color: rgba(124, 124, 124, 0.479);
+    /* border-style: solid; */
+    box-shadow:0px 0px 20px 0.2px black;
     background-color:  #d5e1df;
-    border-width: 4px;
+    /* border-width: 4px; */
     padding: 40px;
 }
 

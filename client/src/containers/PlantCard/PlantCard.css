@@ -1,19 +1,33 @@
 .image-thumb {
     width: 100%;
+    border-style: solid;
+    border-width: 6px;
+    border-color: black;
+    border-radius: 6px;
 }
 
 .plant-name {
     width: 95%;
     display: inline-block;
     margin: 30px;
+    font-size: 70px;
+    font-family: 'Special Elite', cursive;
+}
+
+.plant-name:hover {
+    color: #86af49;
 }
 
 .card-img {
-    width: 100%
+    width: 100%;
 }
 
 .dropdown:hover .dropdown-content {
+    position: relative;
+    left: 250px;
     display: block;
+    font-size: 20px;
+    color: black;
 }
 
 .dropdown-content {
@@ -60,6 +74,16 @@
 
 }
 
+.plant-about {
+    padding: 40px;
+    font-family: 'Special Elite', cursive;
+    font-size: 20px;
+}
+
+.them-comments {
+    font-family: 'Special Elite', cursive;
+}
+
 .comment-btn {
     background-color: #86af49;
     color: white;
@@ -90,10 +114,12 @@
 
 #sick {
     box-shadow:1px 1px 20px 0.2px red;
+    border-radius: 6px;
 }
 
 #thriving {
     box-shadow:0px 0px 20px 0.2px rgb(1, 253, 1);
+    border-radius: 6px;
 }
 
 .filter {

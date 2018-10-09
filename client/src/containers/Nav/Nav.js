@@ -92,7 +92,7 @@ class Nav extends Component {
                             <div href='/create' className='plantsy-nav-link'>Feed</div>
                             <div className="dropdown plantsy-nav-link">
                                 <span>Profile</span>
-                                <div className="dropdown-content">
+                                <div className="dropdown-contents">
                                     <p className='dropdown-links' onClick={this.clickFileUploader}>Add Plant</p>
                                     <p className='dropdown-links' onClick={this.logOut}>Logout</p>
                                 </div>

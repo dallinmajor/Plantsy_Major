@@ -125,9 +125,9 @@ class PlantCard extends Component {
                                         <div>
                                             <img className='comment-thumb' src={'/api/image/' + comment.userImg} />
                                             <div className='comment-username' href={'/friend/' + comment.userName}>{comment.userName}</div>
-                                            <div onClick={() => this.deleteComment(comment._id, plant._id)}>delete</div>
+                                            <div onClick={(e) => {e.preventDefault(); this.deleteComment(comment._id, plant._id)}}>delete</div>
                                         </div>
-                                        <p>{comment.comment}</p>
+                                        <p className='them-comments'>{comment.comment}</p>
                                     </div>
                                 ))}
                                 {isLoadingComment ? (<h2 className='text-center'>loading...</h2>) : null}

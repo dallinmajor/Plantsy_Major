@@ -14,9 +14,10 @@
 .plantsy-nav-color {
     width: 100%;
     background-color: #b5e7a0;
-    border-bottom-style: solid;
+    /* border-bottom-style: solid;
     border-bottom-width: 4px;
-    border-bottom-color: #86af49;
+    border-bottom-color: #86af49; */
+    box-shadow: 0 5px 2px -2px #86af49;
     padding-top: 0.5%;
 }
 
@@ -25,6 +26,10 @@
     display: inline-block;
     font-family: 'Special Elite', cursive;
     vertical-align: text-bottom;
+}
+
+.plantsy-nav-link:hover {
+    color: #86af49;
 }
 
 .nav-buffer {
@@ -49,7 +54,7 @@
     position: absolute;
 }
 
-.dropdown-content {
+.dropdown-contents {
     display: none;
     position: fixed;
     right: 5%;
@@ -65,6 +70,7 @@
     line-height: 14px;
 }
 
-.dropdown:hover .dropdown-content {
+.dropdown:hover .dropdown-contents {
     display: block;
+    color: black;
 }
