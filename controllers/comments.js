@@ -15,14 +15,12 @@ module.exports = {
         .catch(err => res.status(422).json(err));
     },
     create: function (req, res) {
+      console.log(req.body);
       db.Comments
         .create(req.body)
         .then(comment => {
-  
-          console.log(JSON.stringify(comment));
-          db.Plant.updateOne({
-            _id: req.params.plantId
-          },
+          console.log(comment);
+          db.Plant.findByIdAndUpdate((req.params.plantId),
             { $push: { comments: comment._id }, })
             .then(() => res.json(comment));
         })
@@ -42,14 +40,14 @@ module.exports = {
     },
   
     removeFromPlant: function (req, res) {
+      console.log(req.params.commentId);
+      console.log(req.params.plantId);
       db.Comments
         .findById({ _id: req.params.commentId })
         .then(dbModel => dbModel.remove())
         .then(() => {
           db.Plant
-            .updateOne({
-              _id: req.params.plantId
-            }, {
+            .findByIdAndUpdate((req.params.plantId), {
                 $pull: { comments: req.params.commentId }
               })
             .then(() => res.send('comment from plant!'))

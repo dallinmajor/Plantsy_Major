@@ -18,17 +18,15 @@ module.exports = {
             .catch(err => res.status(422).json(err));
     },
     create: function (req, res) {
+        console.log(req.params.id);
         db.Plant
             .create(req.body)
             .then(dbModel => {
                 db.User
-                    .updateOne({
-                        username: req.params.username
-                    }, {
+                    .findByIdAndUpdate((req.params.id), {
                             $push: { plants: dbModel._id }
                         })
                     .then(() => res.send(dbModel))
-
             })
             .catch(err => res.status(422).json(err));
     },
@@ -50,13 +48,11 @@ module.exports = {
 
     removePlantFromUser: function (req, res) {
         db.Plant
-            .findById({ _id: req.params.plantId })
+            .findByIdAndRemove((req.params.plantId))
             .then(dbModel => dbModel.remove())
             .then(() => {
                 db.User
-                    .updateOne({
-                        username: req.params.username
-                    }, {
+                    .findByIdAndUpdate(req.params.userId, {
                             $pull: { plants: req.params.plantId }
                         })
             })

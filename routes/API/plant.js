@@ -3,7 +3,7 @@ const plantController = require('../../controllers/plant');
 
 
 
-router.route('/:username')
+router.route('/:id')
     .post(plantController.create)
 
 router.route('/all')
@@ -15,7 +15,7 @@ router.route("/:id")
     .put(plantController.update)
     .delete(plantController.remove);
 
-router.route('/:plantId/:username')
+router.route('/:plantId/:userId')
     .delete(plantController.removePlantFromUser);
 
 

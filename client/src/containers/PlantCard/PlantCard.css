@@ -1,0 +1,137 @@
+.image-thumb {
+    width: 100%;
+    border-style: solid;
+    border-width: 6px;
+    border-color: black;
+    border-radius: 6px;
+}
+
+.plant-name {
+    width: 95%;
+    display: inline-block;
+    margin: 30px;
+    font-size: 70px;
+    font-family: 'Special Elite', cursive;
+}
+
+.plant-name:hover {
+    color: #86af49;
+}
+
+.card-img {
+    width: 100%;
+}
+
+.dropdown:hover .dropdown-content {
+    position: relative;
+    left: 250px;
+    display: block;
+    font-size: 20px;
+    color: black;
+}
+
+.dropdown-content {
+    display: none;
+    position: absolute;
+    left: -30px;
+    background-color: #f9f9f9;
+    -webkit-box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+    box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+    padding: 12px 16px;
+    border-radius: 6px;
+    z-index: 99;
+}
+
+.hoist {
+    width: 100%;
+    position: relative;
+    top: 0;
+    right: 0;
+    margin-bottom: 15px;
+}
+
+.cancel-button {
+    widows: 5%;
+    text-align: center;
+    display: inline-block;
+}
+
+.image-border {
+    width: 33%;
+    padding:10px;
+    display: inline-block;
+    float: left;
+}
+
+.image-card {
+    width: 70%;
+    margin: auto;
+}
+
+.comment-input {
+    width: 80%;
+    border-radius: 6px;
+
+}
+
+.plant-about {
+    padding: 40px;
+    font-family: 'Special Elite', cursive;
+    font-size: 20px;
+}
+
+.them-comments {
+    font-family: 'Special Elite', cursive;
+}
+
+.comment-btn {
+    background-color: #86af49;
+    color: white;
+    padding: 5px;
+    padding-right: 20px;
+    padding-left: 20px;
+    margin: 4px;
+    border-radius: 6px;
+}
+
+.comment-thumb {
+    display: inline-block;
+    width: 50px;
+    border-radius: 50%
+}
+
+.comment-username {
+    margin-left: 10px;
+    font-size: 20px;
+    color: black;
+    display: inline-block;
+    vertical-align: middle;
+}
+
+.comment-username:hover {
+    color: #86af49;
+}
+
+#sick {
+    box-shadow:1px 1px 20px 0.2px red;
+    border-radius: 6px;
+}
+
+#thriving {
+    box-shadow:0px 0px 20px 0.2px rgb(1, 253, 1);
+    border-radius: 6px;
+}
+
+.filter {
+	width: 100%;
+	visibility: hidden;
+	opacity: 0;
+}
+
+.filter:hover {
+    background-color: rgba(161, 0, 0, 0.3);
+    visibility: visible;
+    top: 0;
+	opacity: 1;
+}
+

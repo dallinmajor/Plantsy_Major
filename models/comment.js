@@ -1,20 +1,21 @@
 var mongoose = require("mongoose");
-
 var Schema = mongoose.Schema;
 
 var CommentsSchema = new Schema({
 
-    user: {
+    comment: {
         type: String,
         required: true
     },
 
-    userImg: {
+    userName:  {
         type: String,
         required: true
     },
-
-    comment: String,
+    userImg:  {
+        type: String,
+        required: true
+    },
 
     date: {
         type: Date,
@@ -25,3 +26,4 @@ var CommentsSchema = new Schema({
 var Comments = mongoose.model("Comment", CommentsSchema);
 
 module.exports = Comments;
+
