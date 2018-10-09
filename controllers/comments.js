@@ -40,14 +40,14 @@ module.exports = {
     },
   
     removeFromPlant: function (req, res) {
+      console.log(req.params.commentId);
+      console.log(req.params.plantId);
       db.Comments
         .findById({ _id: req.params.commentId })
         .then(dbModel => dbModel.remove())
         .then(() => {
           db.Plant
-            .updateOne({
-              _id: req.params.plantId
-            }, {
+            .findByIdAndUpdate((req.params.plantId), {
                 $pull: { comments: req.params.commentId }
               })
             .then(() => res.send('comment from plant!'))

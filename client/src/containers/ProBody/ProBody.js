@@ -14,9 +14,27 @@ class ProfHead extends Component {
             userName: null,
             userPro: null,
             plants: null,
-            displayPlants: null
+            displayPlants: null,
+            thriving: null,
+            sick: null,
         }
     }
+
+    componentWillMount() {
+        let thriving = this.props.plants.filter(plant => plant.health === 'thriving' ? plant : null)
+        let sick = this.props.plants.filter(plant => plant.health === 'sick' ? plant : null)
+
+        this.setState({
+            userPro: this.props.userPro,
+            userName: this.props.userName,
+            userId: this.props.userId,
+            plants: this.props.plants,
+            thriving: thriving,
+            sick: sick,
+            display: 'all'
+        })
+    }
+
 
     deletePlant = (plantId) => {
 
@@ -34,14 +52,18 @@ class ProfHead extends Component {
             .then(res => console.log(res));
     }
 
+    deleteComment = (id, plantId) => {
+        API.Comments.removeFromPlant(id, plantId)
+            .then(res => console.log(res));
+    }
+
     filterPlants = (health) => {
         const { plants } = this.state;
         if (!plants[0]) {
             return 'No Plants..'
         } else {
-            const filted = plants.filter(plant => health.includes(plant.health) ? plant : null)
             this.setState({
-                displayPlants: filted
+                display: health
             })
         }
     }
@@ -51,36 +73,44 @@ class ProfHead extends Component {
             .then(res => console.log(res));
     }
 
-    componentWillMount() {
-        this.setState({
-            userPro: this.props.userPro,
-            userName: this.props.userName,
-            userId: this.props.userId,
-            plants: this.props.plants,
-            displayPlants: this.props.plants
-        })
-    }
-
+    
 
 
 
     render() {
-        const { displayPlants, userId, userName, userPro } = this.state;
+        const { userId, plants, userName, userPro, sick, thriving, display } = this.state;
         return (
             <div>
-                {displayPlants ? (
+                {display ? (
                     <div className='body'>
                         <div className='health-bar-box'>
                             <div className='health-bar-justify'>
-                                <div className='text-center tab' onClick={() => this.filterPlants(['thriving'])}>Thriving</div>
-                                <div className='text-center tab' onClick={() => this.filterPlants(['thriving', 'sick'])}>All</div>
-                                <div className='text-center tab' onClick={() => this.filterPlants(['sick'])}>Sick</div>
+                                <div className='text-center tab' onClick={() => this.filterPlants('thriving')}>Thriving</div>
+                                <div className='text-center tab' onClick={() => this.filterPlants('all')}>All</div>
+                                <div className='text-center tab' onClick={() => this.filterPlants('sick')}>Sick</div>
                             </div>
                         </div>
                         <br/>
-                        {displayPlants.map(plant => {
-                            return <PlantCard plant={plant} userId={userId} userName={userName} deletePlant={this.deletePlant} userPro={userPro} />
-                        })}
+                        <div id='top' />
+                        {display === 'all' ? (
+                            plants.map(plant => {
+                                console.log(plant);
+                                return <PlantCard plant={plant} userId={userId} userName={userName} deleteComment={this.deleteComment} deletePlant={this.deletePlant} userPro={userPro} />
+                            })
+                        ):null}
+                        {display === 'thriving' ? (
+                            thriving.map(plant => {
+                                console.log(plant);
+                                return <PlantCard plant={plant} userId={userId} userName={userName} deleteComment={this.deleteComment} deletePlant={this.deletePlant} userPro={userPro} />
+                            })
+                        ):null}
+                        {display === 'sick' ? (
+                            sick.map(plant => {
+                                console.log(plant);
+                                return <PlantCard plant={plant} userId={userId} userName={userName} deleteComment={this.deleteComment} deletePlant={this.deletePlant} userPro={userPro} />
+                            })
+                        ):null}
+
                     </div>
                 ) : null}
             </div>

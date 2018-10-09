@@ -4,6 +4,7 @@ import API from '../../utils';
 import ProfHead from '../../containers/ProfHead';
 import Nav from '../../containers/Nav';
 import ProBody from '../../containers/ProBody';
+import './Profile.css';
 
 const fileTypes = ['image/x-png', 'image/jpeg', 'image/png', 'image/jpg']
 
@@ -82,10 +83,10 @@ class Profile extends Component {
                 {!this.state.user ? null : (
                     <div>
                         <Nav id={this.state.user._id} addPlant={this.addPlant} />
-                        <div id='top' />
                         <ProfHead picPro={this.state.user.profile_picture} picCov={this.state.user.cover_photo} id={this.state.user._id} />
                         <ProBody plants={this.state.plants} userId={this.state.user._id} userName={this.state.user.fullname} deletePlant={this.deletePlant} userPro={this.state.user.profile_picture} />
                     </div>)}
+                    <div className='bottom-buffer'/>
             </div>
         )
     };

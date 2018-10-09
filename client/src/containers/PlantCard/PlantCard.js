@@ -34,8 +34,6 @@ class PlantCard extends Component {
 
     componentWillMount() {
         const { plant, index, userId, userPro, userName, deleteComment } = this.props;
-
-        console.log(plant.comments);
         this.setState({
             plant: plant,
             index: index,
@@ -63,6 +61,7 @@ class PlantCard extends Component {
             userName: userName,
             userImg: userPro
         }).then(res => {
+            console.log(res.data)
             comments.push(res.data);
             this.setState({
                 comments: comments,
@@ -71,8 +70,12 @@ class PlantCard extends Component {
         });
     }
 
-    removeComment = () => {
-
+    deleteComment = (id, plantId) => {
+        let comments = this.state.comments.filter(comment => comment._id === id ? null : comment);
+        this.setState({
+            comments: comments
+        });
+        this.props.deleteComment(id, plantId);
     }
 
     cancel = () => {
@@ -91,16 +94,16 @@ class PlantCard extends Component {
         return (
             <div className='image-border'>
                 {plant ? (
-                    <AnchorLink href='#top'>
+                    <div>
                         <img className='image-thumb' src={'/api/image/' + plant.image} alt={plant.name} onClick={this.display} />
                         <div className={'filter ' + plant.health}></div>
                         {isDisplaying ? (
-                            <LgBox health={plant.health}>
+                            <LgBox>
                                 <div className='hoist'>
                                     <h1 className='cancel-button' onClick={this.cancel}>x</h1>
                                 </div>
                                 <div className='image-card'>
-                                    <img src={'/api/image/' + plant.image} className='card-img' alt={plant.name} />
+                                    <img src={'/api/image/' + plant.image} id={plant.health} className='card-img' alt={plant.name} />
                                 </div>
                                 <p>{plant.about}</p>
                                 {deletePlant ? (
@@ -113,7 +116,7 @@ class PlantCard extends Component {
                                 ) : (<h1 className='text-center plant-name'>{plant.name}</h1>)}
                                 <p className='plant-about'>{plant.description}</p>
                                 <form>
-                                    <input type='text' className='comment-input' name='comment-input' onChange={this.handleOnChange} />
+                                    <input type='text' className='comment-input' name='comment' onChange={this.handleOnChange} />
                                     <button className='comment-btn' onClick={this.plantComment}>Comment</button>
                                 </form>
                                 <br />
@@ -122,7 +125,7 @@ class PlantCard extends Component {
                                         <div>
                                             <img className='comment-thumb' src={'/api/image/' + comment.userImg} />
                                             <div className='comment-username' href={'/friend/' + comment.userName}>{comment.userName}</div>
-                                            <div onClick={() => this.props.deleteComment(plant._id, comment._id)}>delete</div>
+                                            <div onClick={() => this.deleteComment(comment._id, plant._id)}>delete</div>
                                         </div>
                                         <p>{comment.comment}</p>
                                     </div>
@@ -130,7 +133,7 @@ class PlantCard extends Component {
                                 {isLoadingComment ? (<h2 className='text-center'>loading...</h2>) : null}
                             </LgBox>
                         ) : null}
-                    </AnchorLink>
+                    </div>
                 ) : null}
             </div>
         )
