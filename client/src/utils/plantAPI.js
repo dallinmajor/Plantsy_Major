@@ -17,8 +17,8 @@ export default {
             .catch(err => console.log(err));
     },
 
-    removeFromUser: (id, username) => {
-        return axios.delete(`api/plant/${id}/${username}`)
+    removeFromUser: (id, userId) => {
+        return axios.delete(`api/plant/${id}/${userId}`)
             .catch(err => console.log(err));
     }
 };

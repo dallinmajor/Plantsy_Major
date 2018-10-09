@@ -13,7 +13,7 @@ export default {
     //Output comment data
     create: (plantId, comment) => {
         return axios.post('/api/comments/' + plantId, comment)
-            .catch(err => console(err));
+            .catch(err => console.log(err));
     },
 
     //Input commentId
@@ -34,7 +34,7 @@ export default {
 
     //Input commentId and plantId
         //Output 'deleted!'
-    removeFromUser: (id, plantId) => {
+    removeFromPlant: (id, plantId) => {
         return axios.delete(`api/comments/${id}/${plantId}`)
             .catch(err => console.log(err));
     }

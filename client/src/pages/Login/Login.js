@@ -56,6 +56,7 @@ class Login extends Component {
         if (this.state.username && this.state.password) {
             return API.User.userValidation(this.state.username, this.state.password)
                 .then(result => {
+                    console.log(result);
                     if (result.data.length < 1) {
                         this.setState({
                             error: 'Invalid Username and Password!'
@@ -63,7 +64,7 @@ class Login extends Component {
                     } else {
                         bake_cookie('User', result.data[0]._id);
                         this.setState({
-                            user: result.data
+                            user: result.data[0]
                         })
                     }
                 });

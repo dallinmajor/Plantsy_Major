@@ -30,7 +30,7 @@ router.post('/picCov/:id', upload.single('image'), (req, res) => {
     //Update user profile_picture. if there is one there replace it
     db.User
         .findByIdAndUpdate((req.params.id), { cover_photo: req.file.filename })
-        .then(dbModel => res.json(dbModel))
+        .then(dbModel => res.json(req.file.filename))
         .catch(err => res.status(422).json(err));
 });
 

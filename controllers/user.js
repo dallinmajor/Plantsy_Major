@@ -24,9 +24,14 @@ module.exports = {
     validateUser: function (req, res) {
         db.User
             .find(req.body)
-            .limit(1)
-            .select("_id")
-            .then(result => res.json(result))
+            .populate({
+                path: 'plants',
+                populate: {
+                    path: 'comments',
+                    model: 'Comment',
+                }
+            })
+            .then(user => res.json(user))
             .catch(err => res.status(422).json(err));
     },
     create: function (req, res) {

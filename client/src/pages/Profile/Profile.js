@@ -14,12 +14,6 @@ class Profile extends Component {
             set: false,
             user: null,
             plants: null,
-            display_plants: [],
-            addingPlant: false,
-            plant: '',
-            modal: '',
-            plantname: null,
-            description: null,
         }
     }
 
@@ -28,21 +22,20 @@ class Profile extends Component {
     }
 
     getUser() {
-        console.log('profile');
         const { user } = this.props;
         console.log(user);
         this.setState({
             set: true,
             user: user,
             plants: user.plants,
-            display_plants: user.plants
         })
     }
 
     addPlant = (plant) => {
-        const plants = this.state.plants.unshift(plant);
+        let plants = this.state.plants;
+        plants.push(plant);
         this.setState({
-            plants: plants
+            plants: plants,
         });
     }
 
@@ -58,48 +51,13 @@ class Profile extends Component {
         }
     }
 
-    prepPlantForCreation = () => {
-        API.Plant.createUserPlant(this.state.user.username, { name: 'Staged' })
-            .then(result => (this.setState({
-                prepedPlant: result.data._id
-            }, console.log(this.state.prepedPlant))))
-    }
-
-    handlePostAPlantClick = () => {
-        this.setState({
-            addingPlant: true
-        })
-    }
-
     goHome = () => {
         this.setState({
             display_plants: this.state.user.plants
         })
     }
 
-    deletePlant = (plantId) => {
-        API.Plant.removeFromUser(plantId, this.state.user.username);
-        const { user } = this.state;
-        user.plants = user.plants.filter(plant => plant._id === plantId ? null : plant)
-        console.log(user.plants);
-        console.log(user);
-        this.setState({
-            user: user,
-            display_plants: user.plants
-        })
-    }
-    
-    cancelAddingPlant = (filename) => {
-        console.log(filename);
-        if (filename) {
-            API.Image.remove(filename)
-                .then(result => console.log(result));
-        }
 
-        this.setState({
-            addingPlant: false
-        })
-    }
 
     changePlantHealth = event => {
         API.Plant.update(this.state.plant, {
@@ -115,32 +73,7 @@ class Profile extends Component {
         });
     }
 
-    handlePlantClick = (e, plant) => {
-        console.log(plant);
-        this.setState({
-            modal: 'active',
-            plant: plant
-        })
-    }
 
-    closeModal = () => {
-        this.setState({
-            modal: '',
-            plant: ''
-        })
-    }
-
-
-    addComment = plantId => {
-        API.Comments.create(plantId, {
-            comment: this.state.comment
-        }).then(comment => {
-
-            this.state.user.plants
-                .filter(plant => plantId === plant._id).comments
-                .push(comment);
-        })
-    }
 
     render() {
         return (
@@ -148,11 +81,10 @@ class Profile extends Component {
                 <div className='backDrop'></div>
                 {!this.state.user ? null : (
                     <div>
-                        <Nav id={this.state.user._id} addPlant={this.addPlant}/>
-                        <div id='top'/>
+                        <Nav id={this.state.user._id} addPlant={this.addPlant} />
+                        <div id='top' />
                         <ProfHead picPro={this.state.user.profile_picture} picCov={this.state.user.cover_photo} id={this.state.user._id} />
-                        
-                        <ProBody plants={this.state.plants} userId={this.state.userid}/>
+                        <ProBody plants={this.state.plants} userId={this.state.user._id} userName={this.state.user.fullname} deletePlant={this.deletePlant} userPro={this.state.user.profile_picture} />
                     </div>)}
             </div>
         )

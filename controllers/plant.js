@@ -48,13 +48,11 @@ module.exports = {
 
     removePlantFromUser: function (req, res) {
         db.Plant
-            .findById({ _id: req.params.plantId })
+            .findByIdAndRemove((req.params.plantId))
             .then(dbModel => dbModel.remove())
             .then(() => {
                 db.User
-                    .updateOne({
-                        username: req.params.username
-                    }, {
+                    .findByIdAndUpdate(req.params.userId, {
                             $pull: { plants: req.params.plantId }
                         })
             })

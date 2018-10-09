@@ -87,9 +87,12 @@ class ProfHead extends Component {
         const fd = new FormData();
         fd.append('image', base64);
         API.Image.updateCov(this.state.id, fd)
-            .then(res => this.setState({
-                picCov: res.data
-            }))
+            .then(res => {
+                console.log(res.data);
+                this.setState({
+                    picCov: res.data
+                })
+            })
     }
 
     exitEdit = () => {
@@ -134,7 +137,7 @@ class ProfHead extends Component {
         const { imgSrc, imgSrcExt, picPro, picCov, editingCov, editingPro } = this.state
         return (
             <div>
-                <div className='prof-head-buffer'/>
+                <div className='prof-head-buffer' />
                 <div className='profile-head'>
                     <div onClick={this.clickFileUploaderCov} className='cover-pic'>
                         {picCov ? <img className='cover-picture' src={'/api/image/' + picCov} alt='pic' /> : <div className='empty-cov' />}
@@ -144,7 +147,7 @@ class ProfHead extends Component {
                     </div>
                 </div>
                 {editingPro ? <EditPhoto imgSrc={imgSrc} imgSrcExt={imgSrcExt} editPic={this.editProPic} crop={{ x: 0, y: 0, width: 300, aspect: 1 }} cancel={this.exitEdit} /> : null}
-                {editingCov ? <EditPhoto imgSrc={imgSrc} imgSrcExt={imgSrcExt} editPic={this.editCovPic} crop={{ x: 0, y: 0, width: 300, aspect: 100/33 }} cancel={this.exitEdit} /> : null}
+                {editingCov ? <EditPhoto imgSrc={imgSrc} imgSrcExt={imgSrcExt} editPic={this.editCovPic} crop={{ x: 0, y: 0, width: 300, aspect: 100 / 33 }} cancel={this.exitEdit} /> : null}
                 <input className='hidden-button' type='file' name='image' ref={fileInput => this.fileInput = fileInput} accept={fileTypes} multiple={false} onChange={this.handleImage} />
             </div>
         )

@@ -153,7 +153,7 @@ class CreatePlant extends Component {
                     .then(res => {
                         API.Plant.createUserPlant(this.props.id, {
                             name: name,
-                            about: about,
+                            description: about,
                             health: health,
                             image: res.data
                         }).then(res => {
@@ -174,7 +174,7 @@ class CreatePlant extends Component {
         const { crop, imgSrc, loading } = this.state
         return (
             <LgBox>
-                {loading ? (<h2 className='text-center'>loading</h2>) : (
+                {loading ? (<h2 className='text-center'>loading...</h2>) : (
                     <div>
                         <div className='x' onClick={this.props.cancel}>x</div>
                         <input className='hidden-button' type='file' name='image' ref={fileInput => this.fileInput = fileInput} accept={fileTypes} multiple={false} onChange={this.handleImage} />

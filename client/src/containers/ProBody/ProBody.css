@@ -2,3 +2,22 @@
     width: 90%;
     margin: auto;
 }
+
+.health-bar-box {
+    width:100%;
+}
+
+.health-bar-justify {
+    width: 60%;
+    margin: auto;
+    display: flex;
+    justify-content: space-between;
+}
+
+.tab {
+    color: gray;
+}
+
+.tab:hover {
+    color:#86af49;
+}

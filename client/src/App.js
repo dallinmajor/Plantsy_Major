@@ -23,9 +23,18 @@ class App extends Component {
     console.log(cookie[0] ? true : false);
     if (cookie[0]) {
       API.User.find(cookie)
-        .then(res => this.setState({
-          user: res.data
-        }));
+        .then(res => {
+          if(res.data) {
+            this.setState({
+              user: res.data
+            })
+          } else {
+            delete_cookie('User');
+            this.setState({
+              login: true
+            })
+          }
+        });
     } else {
       this.setState({
         login: true

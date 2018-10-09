@@ -15,14 +15,12 @@ module.exports = {
         .catch(err => res.status(422).json(err));
     },
     create: function (req, res) {
+      console.log(req.body);
       db.Comments
         .create(req.body)
         .then(comment => {
-  
-          console.log(JSON.stringify(comment));
-          db.Plant.updateOne({
-            _id: req.params.plantId
-          },
+          console.log(comment);
+          db.Plant.findByIdAndUpdate((req.params.plantId),
             { $push: { comments: comment._id }, })
             .then(() => res.json(comment));
         })

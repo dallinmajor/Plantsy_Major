@@ -1,7 +1,7 @@
 import React from 'react';
 import './LgBox.css';
 
-const LgBox = ({ children }) => (
+const LgBox = ({ children, health }) => (
     <div className='lg_box'>
         <div className='cover_top'/>
         <div className='lg_box_buffer'/>
