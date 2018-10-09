@@ -5,7 +5,7 @@ import Login from './pages/Login';
 import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
 import API from './utils';
 import './index.css';
-import { read_cookie } from 'sfcookies';
+import { read_cookie, delete_cookie} from 'sfcookies';
 
 
 class App extends Component {

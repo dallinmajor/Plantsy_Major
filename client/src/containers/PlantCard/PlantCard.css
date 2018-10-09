@@ -1,0 +1,63 @@
+.image-thumb {
+    width: 100%;
+}
+
+.plant-name {
+    width: 95%;
+    display: inline-block;
+}
+
+.card-img {
+    width: 100%
+}
+.hoist {
+    width: 100%;
+    position: relative;
+    top: 0;
+    right: 0;
+    margin-bottom: 15px;
+}
+
+.cancel-button {
+    widows: 5%;
+    text-align: center;
+    display: inline-block;
+}
+
+.image-border {
+    width: 33%;
+    padding:10px;
+    display: inline-block;
+    float: left;
+}
+
+.image-card {
+    width: 70%;
+    margin: auto;
+}
+
+.thriving {
+    background-color: rgba(161, 0, 0, 0.3);
+}
+
+.comment {
+    width: 70%
+}
+
+.filter {
+   position: relative;
+	width: 100%;
+    top:0;
+    right:0;
+	left: 0;
+	visibility: hidden;
+	opacity: 0;
+}
+
+.filter:hover {
+    background-color: rgba(161, 0, 0, 0.3);
+    visibility: visible;
+    top: 0;
+	opacity: 1;
+}
+

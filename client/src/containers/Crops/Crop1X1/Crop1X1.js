@@ -20,7 +20,6 @@ class Crop1X1 extends Component {
     }
 
     componentDidMount() {
-        console.log(this.props.aspect)
         this.setState({
             imgSrc: this.props.imgSrc,
             imgSrcExt: this.props.imgSrcExt,
@@ -75,7 +74,6 @@ class Crop1X1 extends Component {
     }
 
     handleOnCropChange = (crop) => {
-        console.log(crop);
         this.setState({ crop: crop });
     }
 

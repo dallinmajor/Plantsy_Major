@@ -106,7 +106,8 @@ class CreatePlant extends Component {
             imgSrc: null,
             imgSrcExt: null,
             isCropped: false,
-            crop: null
+            crop: null,
+            lading: false
         })
     }
 
@@ -135,6 +136,9 @@ class CreatePlant extends Component {
 
     handleSubmit = (event) => {
         if (this.state.name) {
+            this.setState({
+                loading: true
+            })
             event.preventDefault()
             const { imgSrc, imgSrcExt, name, about, health } = this.state
             if (imgSrc) {
@@ -167,52 +171,55 @@ class CreatePlant extends Component {
     }
 
     render() {
-        const { crop, imgSrc } = this.state
+        const { crop, imgSrc, loading } = this.state
         return (
             <LgBox>
-                <div className='x' onClick={this.props.cancel}>x</div>
-                <div>
-                    <input className='hidden-button' type='file' name='image' ref={fileInput => this.fileInput = fileInput} accept={fileTypes} multiple={false} onChange={this.handleImage} />
-                    <div className='inner_box'>
-                        {this.state.imgSrc ? (
-                            <div>
-                                <div className="box-picture">
-                                    <canvas ref={this.imagePreviewCanvasRef} className='imageCanvas'></canvas>
-                                    <div className="box-center">
-                                        <ReactCrop
-                                            src={imgSrc}
-                                            crop={crop}
-                                            onChange={this.handleOnCropChange}
-                                            onImageLoaded={this.handleImageLoaded}
-                                            onComplete={this.handleOnCropComplete}
-                                        />
+                {loading ? (<h2 className='text-center'>loading</h2>) : (
+                    <div>
+                        <div className='x' onClick={this.props.cancel}>x</div>
+                        <input className='hidden-button' type='file' name='image' ref={fileInput => this.fileInput = fileInput} accept={fileTypes} multiple={false} onChange={this.handleImage} />
+                        <div className='inner_box'>
+                            {this.state.imgSrc ? (
+                                <div>
+                                    <div className="box-picture">
+                                        <canvas ref={this.imagePreviewCanvasRef} className='imageCanvas'></canvas>
+                                        <div className="box-center">
+                                            <ReactCrop
+                                                src={imgSrc}
+                                                crop={crop}
+                                                onChange={this.handleOnCropChange}
+                                                onImageLoaded={this.handleImageLoaded}
+                                                onComplete={this.handleOnCropComplete}
+                                            />
+                                        </div>
                                     </div>
                                 </div>
-                            </div>
-                        ) : null}
-                        <h6 onClick={this.clickFileUploader} className='text-center plantsy'>Change Photo?</h6>
+                            ) : null}
+                            <h6 onClick={this.clickFileUploader} className='text-center plantsy'>Change Photo?</h6>
+                        </div>
+
+                        <br /> <br />
+                        <Form>
+                            <FormGroup>
+                                <Input type="text" name="name" id="input-plant" onChange={this.handleInputChange} placeholder="What's the name of you plant?" />
+                            </FormGroup>
+                            <br />
+                            <FormGroup>
+                                <FormText>Is your plant in need of help?</FormText>
+                                <Input type="select" name="health" onChange={this.handleInputChange} id="select-health">
+                                    <option value='thriving'>Nope</option>
+                                    <option value='sick'>Yes please!</option>
+                                </Input>
+                            </FormGroup>
+                            <FormText>Don't be afraid to include gardening tips or ask others for help!</FormText>
+                            <FormGroup>
+                                <Input type="textarea" name="about" id="input-about" onChange={this.handleInputChange} placeholder='What make your plant special to you?' />
+                            </FormGroup>
+                            <br />
+                            {this.state.error ? <h4 className='imageWarning'>{this.state.error}</h4> : <Button onClick={this.handleSubmit}>Add Plant!</Button>}
+                        </Form>
                     </div>
-                </div>
-                <br /><br />
-                <Form>
-                    <FormGroup>
-                        <Input type="text" name="name" id="input-plant" onChange={this.handleInputChange} placeholder="What's the name of you plant?" />
-                    </FormGroup>
-                    <br />
-                    <FormGroup>
-                        <FormText>Is your plant in need of help?</FormText>
-                        <Input type="select" name="health" onChange={this.handleInputChange} id="select-health">
-                            <option value='thriving'>Nope</option>
-                            <option value='sick'>Yes please!</option>
-                        </Input>
-                    </FormGroup>
-                    <FormText>Don't be afraid to include gardening tips or ask others for help!</FormText>
-                    <FormGroup>
-                        <Input type="textarea" name="about" id="input-about" onChange={this.handleInputChange} placeholder='What make your plant special to you?' />
-                    </FormGroup>
-                    <br />
-                    {this.state.error ? <h4 className='imageWarning'>{this.state.error}</h4> : <Button onClick={this.handleSubmit}>Add Plant!</Button>}
-                </Form>
+                )}
             </LgBox>
         )
     }

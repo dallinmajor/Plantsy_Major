@@ -45,9 +45,16 @@ class Nav extends Component {
         }
     }
 
-    cancelCreatePlant=()=>{
+    addPlant = (plant) => {
         this.setState({
             isCreatingPlant: false
+        })
+        this.props.addPlant(plant)
+    }
+
+    cancelCreatePlant=()=>{
+        this.setState({
+            isCreatingPlant: null
         })
     }
 
@@ -94,7 +101,7 @@ class Nav extends Component {
                     </div>
                     <input className='hidden-button' type='file' name='image' ref={fileInput => this.fileInput = fileInput} accept={fileTypes} multiple={false} onChange={this.handleImage} />
                     {this.state.isCreatingPlant ? (
-                        <CreatePlant imgSrc={this.state.imgSrc} imgSrcExt={this.state.imgSrcExt} id={this.props.id} addPlant={this.props.addPlant} crop={{ x: 0, y: 0, width: 300, aspect: 1}} cancel={this.cancelCreatePlant}/>
+                        <CreatePlant imgSrc={this.state.imgSrc} imgSrcExt={this.state.imgSrcExt} id={this.props.id} addPlant={this.addPlant} crop={{ x: 0, y: 0, width: 300, aspect: 1}} cancel={this.cancelCreatePlant}/>
                     ):null}
                 </div>
             )

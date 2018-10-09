@@ -3,6 +3,7 @@ import './Profile.css';
 import API from '../../utils';
 import ProfHead from '../../containers/ProfHead';
 import Nav from '../../containers/Nav';
+import ProBody from '../../containers/ProBody';
 
 const fileTypes = ['image/x-png', 'image/jpeg', 'image/png', 'image/jpg']
 
@@ -29,6 +30,7 @@ class Profile extends Component {
     getUser() {
         console.log('profile');
         const { user } = this.props;
+        console.log(user);
         this.setState({
             set: true,
             user: user,
@@ -38,7 +40,7 @@ class Profile extends Component {
     }
 
     addPlant = (plant) => {
-        const plants = this.state.plants.shift(plant);
+        const plants = this.state.plants.unshift(plant);
         this.setState({
             plants: plants
         });
@@ -142,11 +144,15 @@ class Profile extends Component {
 
     render() {
         return (
-            <div className='backDrop'>
+            <div>
+                <div className='backDrop'></div>
                 {!this.state.user ? null : (
                     <div>
                         <Nav id={this.state.user._id} addPlant={this.addPlant}/>
+                        <div id='top'/>
                         <ProfHead picPro={this.state.user.profile_picture} picCov={this.state.user.cover_photo} id={this.state.user._id} />
+                        
+                        <ProBody plants={this.state.plants} userId={this.state.userid}/>
                     </div>)}
             </div>
         )
