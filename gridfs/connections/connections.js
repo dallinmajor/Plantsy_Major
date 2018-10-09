@@ -1,7 +1,7 @@
 const mongoose = require('mongoose');
 
 
-const mongoURI = 'mongodb://dallinmajor:Pin4Dallin@ds151382.mlab.com:51382/mytestbd';
+const mongoURI = process.env.MONGODB_URI || 'mongodb://dallinmajor:Pin4Dallin@ds151382.mlab.com:51382/mytestbd';
 const conn = mongoose.createConnection(mongoURI, (err, db) => {
     if (err) {
         console.log('err', err);
