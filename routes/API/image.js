@@ -26,7 +26,7 @@ router.post('/picPro/:id', upload.single('image'), (req, res) => {
 });
 
 
-router.post('/coverPhoto/:id', upload.single('image'), (req, res) => {
+router.post('/picCov/:id', upload.single('image'), (req, res) => {
     //Update user profile_picture. if there is one there replace it
     db.User
         .findByIdAndUpdate((req.params.id), { cover_photo: req.file.filename })

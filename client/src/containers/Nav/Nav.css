@@ -13,7 +13,10 @@
 
 .plantsy-nav-color {
     width: 100%;
-    background-color: rgba(132, 255, 128, 0.5);
+    background-color: #b5e7a0;
+    border-bottom-style: solid;
+    border-bottom-width: 4px;
+    border-bottom-color: #86af49;
     padding-top: 0.5%;
 }
 
@@ -34,11 +37,11 @@
     vertical-align: center;
     color: rgb(12, 65, 28);
     font-family: 'Special Elite', cursive;
-    font-size: 35px;
+    font-size: 50px;
     z-index: 0;
     width: 70%;
     padding: 0;
-    line-height: 34px;
+    line-height: 50px;
     height: auto;
 }
 

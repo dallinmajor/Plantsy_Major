@@ -16,7 +16,7 @@ class EditPhoto extends Component {
                     imgSrc={this.props.imgSrc}
                     imgSrcExt={this.props.imgSrcExt}
                     crop={this.props.crop}
-                    sendBase64={this.props.editProPic}
+                    sendBase64={this.props.editPic}
                 />
             </LgBox>
         )

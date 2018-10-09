@@ -146,7 +146,7 @@ class Profile extends Component {
                 {!this.state.user ? null : (
                     <div>
                         <Nav id={this.state.user._id} addPlant={this.addPlant}/>
-                        <ProfHead picPro={this.state.user.profile_picture} picCover={this.state.user.cover_photo} id={this.state.user._id} />
+                        <ProfHead picPro={this.state.user.profile_picture} picCov={this.state.user.cover_photo} id={this.state.user._id} />
                     </div>)}
             </div>
         )

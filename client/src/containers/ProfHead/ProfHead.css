@@ -1,20 +1,55 @@
+.prof-head-buffer{
+    width: 100%;
+    height: 100px;
+}
+
+.profile-head {
+    width: 70%;
+    margin: auto;
+}
+
 .center-child {
     width: 100%;
     justify-content: center;
 }
 
-.profile-upload {
-    width: 15%;
+.profile-pic {
+    position: relative;
+    top: -150px;
+    left: 25px;
+    width: 25%;
 } 
 
-.photo-empty {
-    background-color: rgb(177, 176, 176);
+.cover-pic {
+    width: 100%
+}
+
+.empty-pro {
     width: 100%;
+    background-color: rgb(129, 129, 129);
     padding-top: 100%;
-    border-radius: 100px;
+    border-radius: 50%;
+}
+
+.empty-cov {
+    width: 100%;
+    background-color: rgb(102, 100, 100);
+    padding-top: 33%;
 }
 
 .profile-picture {
+    border-style: solid;
+    border-color: #e3eaa7;
+    border-width: 4px;
+
     width: 100%;
     border-radius: 50%
+}
+
+.cover-picture {
+    width: 100%;
+    border-style: solid;
+    border-color: #86af49;
+    border-width: 4px;
+    border-radius: 6px;
 }

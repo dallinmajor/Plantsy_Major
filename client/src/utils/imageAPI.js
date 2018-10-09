@@ -13,6 +13,12 @@ export default {
             .catch(err => console.log(err));
     },
 
+    updateCov: (id, image) => {
+        return axios.post('/api/image/picCov/' + id, image)
+            .catch(err => console.log(err));
+    },
+
+
     remove: (filename) => {
         return axios.delete('/api/image/' + filename)
             .catch(err => console.log(err));

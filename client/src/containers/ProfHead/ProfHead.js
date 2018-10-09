@@ -2,7 +2,7 @@ import React, { Component } from "react";
 import EditPhoto from '../EditPhoto';
 import './ProfHead.css';
 import API from '../../utils';
-import { image64toCanvasRef, extractImageFileExtensionFromBase64, base64StringtoFile, downloadBase64File } from '../../base64/base64';
+import { extractImageFileExtensionFromBase64 } from '../../base64/base64';
 
 const fileTypes = ['image/x-png', 'image/jpeg', 'image/png', 'image/jpg']
 const maxSize = 10000000;
@@ -18,7 +18,9 @@ class ProfHead extends Component {
             imgSrcExt: null,
             editFunc: null,
             editAspect: null,
-            isEditting: false
+            editingPro: false,
+            editingCov: false,
+            edit: null
         }
     }
 
@@ -30,7 +32,17 @@ class ProfHead extends Component {
         })
     }
 
-    clickFileUploader = () => {
+    clickFileUploaderPro = () => {
+        this.setState({
+            edit: 'Pro'
+        })
+        this.fileInput.click();
+    }
+
+    clickFileUploaderCov = () => {
+        this.setState({
+            edit: 'Cov'
+        })
         this.fileInput.click();
     }
 
@@ -55,7 +67,8 @@ class ProfHead extends Component {
 
     editProPic = (base64) => {
         this.setState({
-            isEditting: false,
+            editingCov: false,
+            editingPro: false
         })
         const fd = new FormData();
         fd.append('image', base64);
@@ -65,9 +78,24 @@ class ProfHead extends Component {
             }))
     }
 
+    editCovPic = (base64) => {
+        this.setState({
+            editingCov: false,
+            editingPro: false
+        })
+
+        const fd = new FormData();
+        fd.append('image', base64);
+        API.Image.updateCov(this.state.id, fd)
+            .then(res => this.setState({
+                picCov: res.data
+            }))
+    }
+
     exitEdit = () => {
         this.setState({
-            isEditting: false
+            editingCov: false,
+            editingPro: false
         })
     }
 
@@ -81,11 +109,19 @@ class ProfHead extends Component {
                 const image = files[0];
                 const reader = new FileReader();
                 reader.addEventListener("load", () => {
-                    this.setState({
-                        isEditting: true,
-                        imgSrc: reader.result,
-                        imgSrcExt: extractImageFileExtensionFromBase64(reader.result)
-                    })
+                    if (this.state.edit === 'Pro') {
+                        this.setState({
+                            imgSrc: reader.result,
+                            imgSrcExt: extractImageFileExtensionFromBase64(reader.result),
+                            editingPro: true
+                        })
+                    } else if (this.state.edit === 'Cov') {
+                        this.setState({
+                            imgSrc: reader.result,
+                            imgSrcExt: extractImageFileExtensionFromBase64(reader.result),
+                            editingCov: true
+                        })
+                    }
                 }, false)
                 reader.readAsDataURL(image);
             }
@@ -95,14 +131,20 @@ class ProfHead extends Component {
 
 
     render() {
-        const { imgSrc, imgSrcExt, editFunc, editAspect, picPro, isEditting } = this.state
+        const { imgSrc, imgSrcExt, picPro, picCov, editingCov, editingPro } = this.state
         return (
             <div>
-
-                <div onClick={this.clickFileUploader} className='profile-upload'>
-                    {picPro ? <img className='profile-picture' src={'/api/image/' + picPro} alt='pic' /> : <div className='photo-empty' />}
+                <div className='prof-head-buffer'/>
+                <div className='profile-head'>
+                    <div onClick={this.clickFileUploaderCov} className='cover-pic'>
+                        {picCov ? <img className='cover-picture' src={'/api/image/' + picCov} alt='pic' /> : <div className='empty-cov' />}
+                    </div>
+                    <div onClick={this.clickFileUploaderPro} className='profile-pic '>
+                        {picPro ? <img className='profile-picture' src={'/api/image/' + picPro} alt='pic' /> : <div className='empty-pro' />}
+                    </div>
                 </div>
-                {isEditting ? <EditPhoto imgSrc={imgSrc} imgSrcExt={imgSrcExt} editProPic={this.editProPic} crop={{ x: 0, y: 0, width: 300, aspect: 1}} exit={this.exitEdit} /> : null}
+                {editingPro ? <EditPhoto imgSrc={imgSrc} imgSrcExt={imgSrcExt} editPic={this.editProPic} crop={{ x: 0, y: 0, width: 300, aspect: 1 }} cancel={this.exitEdit} /> : null}
+                {editingCov ? <EditPhoto imgSrc={imgSrc} imgSrcExt={imgSrcExt} editPic={this.editCovPic} crop={{ x: 0, y: 0, width: 300, aspect: 100/33 }} cancel={this.exitEdit} /> : null}
                 <input className='hidden-button' type='file' name='image' ref={fileInput => this.fileInput = fileInput} accept={fileTypes} multiple={false} onChange={this.handleImage} />
             </div>
         )
