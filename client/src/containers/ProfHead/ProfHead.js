@@ -60,7 +60,9 @@ class ProfHead extends Component {
         const fd = new FormData();
         fd.append('image', base64);
         API.Image.updatePro(this.state.id, fd)
-            .then(res => window.location.reload())
+            .then(res => this.setState({
+                picPro: res.data
+            }))
     }
 
     exitEdit = () => {
@@ -98,9 +100,9 @@ class ProfHead extends Component {
             <div>
 
                 <div onClick={this.clickFileUploader} className='profile-upload'>
-                    {this.state.picPro ? <img className='profile-picture' src={'/api/image/' + picPro} alt='pic' /> : <div className='photo-empty' />}
+                    {picPro ? <img className='profile-picture' src={'/api/image/' + picPro} alt='pic' /> : <div className='photo-empty' />}
                 </div>
-                {isEditting ? <EditPhoto imgSrc={imgSrc} imgSrcExt={imgSrcExt} editProPic={this.editProPic} edit={{ aspect: 1 / 1 }} exit={this.exitEdit} /> : null}
+                {isEditting ? <EditPhoto imgSrc={imgSrc} imgSrcExt={imgSrcExt} editProPic={this.editProPic} crop={{ x: 0, y: 0, width: 300, aspect: 1}} exit={this.exitEdit} /> : null}
                 <input className='hidden-button' type='file' name='image' ref={fileInput => this.fileInput = fileInput} accept={fileTypes} multiple={false} onChange={this.handleImage} />
             </div>
         )

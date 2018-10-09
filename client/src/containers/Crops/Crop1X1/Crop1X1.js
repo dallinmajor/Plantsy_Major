@@ -20,16 +20,18 @@ class Crop1X1 extends Component {
     }
 
     componentDidMount() {
+        console.log(this.props.aspect)
         this.setState({
             imgSrc: this.props.imgSrc,
             imgSrcExt: this.props.imgSrcExt,
-            crop: this.props.aspect
+            crop: this.props.crop
         })
     }
 
     clickFileUploader = () => {
         this.setState({
-            imgSrc: null
+            imgSrc: null,
+            crop: this.props.crop
         })
         this.fileInput.click();
     }
@@ -73,6 +75,7 @@ class Crop1X1 extends Component {
     }
 
     handleOnCropChange = (crop) => {
+        console.log(crop);
         this.setState({ crop: crop });
     }
 

@@ -2,7 +2,7 @@ import React, { Component } from "react";
 import API from '../../utils';
 import './CreateUser.css';
 import 'bootstrap/dist/css/bootstrap.min.css';
-// import DragNDrop from '../../containers/PostAPlant/DragNDrop';
+import { bake_cookie } from 'sfcookies';
 import { Form, Col, FormGroup, Label, Input, Button, Container, FormFeedback, FormText } from 'reactstrap';
 
 class CreateUser extends Component {
@@ -63,7 +63,10 @@ class CreateUser extends Component {
                 "lastname": lastname,
                 "about": about,
 
-            }).then(result => window.location.assign('/profile/' + result.data._id))
+            }).then(result => {
+                bake_cookie('User', result.data._id);
+                window.location.assign('/');
+            })
                 .catch(err => console.log(err));
         } else {
             this.setState({

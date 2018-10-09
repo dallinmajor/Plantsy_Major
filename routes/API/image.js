@@ -13,20 +13,6 @@ conn.once('open', () => {
 
 });
 
-//ROUTES for Images
-
-router.post('/plant/:plantId', upload.single('image'), (req, res) => {
-    console.log(req.file.filename);
-    db.Plant
-        .updateOne({ _id: req.params.plantId }, { image: req.file.filename })
-        .then(dbModel => res.json(dbModel))
-        .catch(err => res.status(422).json(err));
-});
-
-
-
-//ROUTES for User Profile_Picture
-
 router.post('/', upload.single('image'), (req, res) => {
     console.log(req.file.filename);
     res.send(req.file.filename);
@@ -40,12 +26,10 @@ router.post('/picPro/:id', upload.single('image'), (req, res) => {
 });
 
 
-//ROUTES for User Cover Photo
-
-router.post('/coverPhoto/:username', upload.single('image'), (req, res) => {
+router.post('/coverPhoto/:id', upload.single('image'), (req, res) => {
     //Update user profile_picture. if there is one there replace it
     db.User
-        .updateOne({ username: req.params.username }, { cover_photo: req.file.filename })
+        .findByIdAndUpdate((req.params.id), { cover_photo: req.file.filename })
         .then(dbModel => res.json(dbModel))
         .catch(err => res.status(422).json(err));
 });

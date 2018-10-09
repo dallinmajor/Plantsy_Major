@@ -10,7 +10,9 @@ class Profile extends Component {
     constructor(props) {
         super(props)
         this.state = {
+            set: false,
             user: null,
+            plants: null,
             display_plants: [],
             addingPlant: false,
             plant: '',
@@ -24,6 +26,24 @@ class Profile extends Component {
         this.getUser();
     }
 
+    getUser() {
+        console.log('profile');
+        const { user } = this.props;
+        this.setState({
+            set: true,
+            user: user,
+            plants: user.plants,
+            display_plants: user.plants
+        })
+    }
+
+    addPlant = (plant) => {
+        const plants = this.state.plants.shift(plant);
+        this.setState({
+            plants: plants
+        });
+    }
+
     filterPlants = (health) => {
         const { user } = this.state;
         if (!user.plants[0]) {
@@ -34,15 +54,6 @@ class Profile extends Component {
                 display_plants: filted
             })
         }
-    }
-
-    getUser() {
-        API.User.find(this.props.match.params.id)
-            .then(res => this.setState({
-                user: res.data,
-                display_plants: res.data.plants
-            }))
-            .catch(err => console.log(err));
     }
 
     prepPlantForCreation = () => {
@@ -75,16 +86,7 @@ class Profile extends Component {
             display_plants: user.plants
         })
     }
-
-    addPlantToUser = (plant) => {
-        let { user } = this.state
-        user.plants.unshift(plant)
-        this.setState({
-            user: user,
-            addingPlant: false
-        })
-    }
-
+    
     cancelAddingPlant = (filename) => {
         console.log(filename);
         if (filename) {
@@ -143,10 +145,9 @@ class Profile extends Component {
             <div className='backDrop'>
                 {!this.state.user ? null : (
                     <div>
-                        <Nav id={this.state.user._id} />
+                        <Nav id={this.state.user._id} addPlant={this.addPlant}/>
                         <ProfHead picPro={this.state.user.profile_picture} picCover={this.state.user.cover_photo} id={this.state.user._id} />
-                    </div>
-                )}
+                    </div>)}
             </div>
         )
     };

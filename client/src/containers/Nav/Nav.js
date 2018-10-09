@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import './Nav.css';
 import CreatePlant from '../CreatePlant';
-import { image64toCanvasRef, extractImageFileExtensionFromBase64, base64StringtoFile, downloadBase64File } from '../../base64/base64';
+import {extractImageFileExtensionFromBase64} from '../../base64/base64';
 import { delete_cookie } from 'sfcookies';
 
 const fileTypes = ['image/x-png', 'image/jpeg', 'image/png', 'image/jpg'];
@@ -45,6 +45,12 @@ class Nav extends Component {
         }
     }
 
+    cancelCreatePlant=()=>{
+        this.setState({
+            isCreatingPlant: false
+        })
+    }
+
     handleImage = (e) => {
         e.preventDefault();
         const files = e.target.files;
@@ -65,6 +71,9 @@ class Nav extends Component {
         }
     }
 
+    addPlant = (plant) => {
+        this.props.addPlant(plant);
+    }
         render() {
             return (
                 <div>
@@ -85,7 +94,7 @@ class Nav extends Component {
                     </div>
                     <input className='hidden-button' type='file' name='image' ref={fileInput => this.fileInput = fileInput} accept={fileTypes} multiple={false} onChange={this.handleImage} />
                     {this.state.isCreatingPlant ? (
-                        <CreatePlant imgSrc={this.state.imgSrc} imgSrcExt={this.state.imgSrcExt} id={this.props.id}/>
+                        <CreatePlant imgSrc={this.state.imgSrc} imgSrcExt={this.state.imgSrcExt} id={this.props.id} addPlant={this.props.addPlant} crop={{ x: 0, y: 0, width: 300, aspect: 1}} cancel={this.cancelCreatePlant}/>
                     ):null}
                 </div>
             )
