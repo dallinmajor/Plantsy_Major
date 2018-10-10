@@ -5,7 +5,7 @@ const router = require('./routes');
 const mongoose = require('mongoose');
 
 mongoose.connect(
-    "mongodb://dallinmajor:Pin4Dallin@ds151382.mlab.com:51382/mytestbd",
+    process.env.MONGODB_URI || "mongodb://dallinmajor:Pin4Dallin@ds151382.mlab.com:51382/mytestbd",
     { useNewUrlParser: true }
 );
 
