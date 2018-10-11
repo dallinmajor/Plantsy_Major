@@ -25,6 +25,7 @@ class App extends Component {
       API.User.find(cookie)
         .then(res => {
           if(res.data) {
+            console.log(res.data);
             this.setState({
               user: res.data
             })

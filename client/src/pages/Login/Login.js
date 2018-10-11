@@ -126,7 +126,7 @@ class Login extends Component {
                                 <Link className='create' to='/create'>Create Account</Link>
                                 <br />
                                 <br />
-                                <Button onClick={this.validateEmail}>Submit</Button>
+                                <Button onClick={this.validateEmail}>Login</Button>
                             </Form>
                         </Container>
                     </div>
